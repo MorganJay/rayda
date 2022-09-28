@@ -6,7 +6,7 @@ import { CartContainer, CartCounter } from './styles';
 const Cart = () => {
   return (
     <CartContainer>
-      <CartIcon />
+      <CartIcon fill="#43464E" />
       <CartCounter hidden>3</CartCounter>
     </CartContainer>
   );

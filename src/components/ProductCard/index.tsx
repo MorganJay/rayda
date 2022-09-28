@@ -1,12 +1,15 @@
-import React from 'react';
-import { Wrapper, DetailsContainer } from './styles';
+import { Wrapper, DetailsContainer, CartContainer } from './styles';
 
-import { ProductD } from '../../assets';
+import { CartIcon, ProductD } from '../../assets';
+import { Product } from '../../constants/types';
 
 const ProductCard = () => {
   return (
     <Wrapper>
       <img src={ProductD} alt="product" />
+      <CartContainer>
+        <CartIcon fill='#ffffff' />
+      </CartContainer>
       <DetailsContainer>
         Apollo Running Short <br />
         <span>$50.00</span>

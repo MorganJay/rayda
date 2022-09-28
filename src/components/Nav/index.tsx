@@ -25,7 +25,7 @@ const Nav = () => {
           KIDS
         </NavLink>
       </div>
-      <Link to="/" style={{ paddingRight: 100}}>
+      <Link to="/" style={{ paddingRight: 150}}>
         <Logo />
       </Link>
       <CartCurrencyContainer>

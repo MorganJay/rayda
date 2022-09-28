@@ -3,6 +3,6 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  gap: 3rem;
+  gap: 4rem 2rem;
   flex-wrap: wrap;
 `;

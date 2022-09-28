@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { darkColor, white } from '../../constants/variables.styles';
 
 export const CartContainer = styled.div`
-  cursor: 'pointer';
+  cursor: pointer;
   display: flex;
 `;
 

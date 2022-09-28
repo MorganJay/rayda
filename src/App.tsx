@@ -1,18 +1,22 @@
 import { Route, Routes } from 'react-router';
-import { Page1 } from './pages/Checkout';
-import CategoryPage from './pages/Category';
-import Nav from './components/Nav';
 
-import './App.css';
+import Nav from './components/Nav';
+import CategoryPage from './pages/Category';
+import ProductDisplay from './pages/Product';
+import CheckoutPage from './pages/Checkout';
+
+import GlobalStyle from './GlobalStyles';
 
 function App() {
   return (
     <div className="App">
+      <GlobalStyle />
       <Nav />
       <main>
         <Routes>
           <Route path="/" element={<CategoryPage />} />
-          <Route path="/page1" element={<Page1 />} />
+          <Route path="/product/:id" element={<ProductDisplay />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
         </Routes>
       </main>
     </div>

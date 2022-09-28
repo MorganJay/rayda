@@ -1,5 +1,5 @@
-export function Page1() {
-  return (
-    <h1>Page 1</h1>
-  )
-}
+const CheckoutPage = () => {
+  return <h1>Checkout out screen</h1>;
+};
+
+export default CheckoutPage;

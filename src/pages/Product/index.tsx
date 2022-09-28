@@ -1,5 +1,5 @@
-export function Page2() {
-  return (
-    <h1>Page 2</h1>
-  )
-}
+const ProductDisplay = () => {
+  return <h1>A product was clicked</h1>;
+};
+
+export default ProductDisplay;
