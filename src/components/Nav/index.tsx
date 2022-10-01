@@ -6,11 +6,14 @@ import Cart from '../Cart';
 import { Logo } from '../../assets';
 
 import { NavLink, Navbar, CartCurrencyContainer } from './styles';
+import { selectCartState } from '../../features/cart/cartSlice';
+import { useAppSelector } from '../../app/hooks';
+import CartDropdown from '../CartDropdown/index';
 
 const Nav = () => {
-  const className = ({ isActive }: { isActive: boolean }) => {
-    return `${isActive ? 'active' : ''}`;
-  };
+  const { hidden } = useAppSelector(selectCartState);
+  const className = ({ isActive }: { isActive: boolean }) =>
+    `${isActive ? 'active' : ''}`;
 
   return (
     <Navbar>
@@ -25,13 +28,14 @@ const Nav = () => {
           KIDS
         </NavLink>
       </div>
-      <Link to="/" style={{ paddingRight: 150}}>
+      <Link to="/" style={{ paddingRight: 150 }}>
         <Logo />
       </Link>
       <CartCurrencyContainer>
         <CurrencySwitcher />
         <Cart />
       </CartCurrencyContainer>
+      {hidden ? null : <CartDropdown />}
     </Navbar>
   );
 };

@@ -5,20 +5,24 @@ import CategoryPage from './pages/Category';
 import ProductDisplay from './pages/Product';
 import CheckoutPage from './pages/Checkout';
 
-import GlobalStyle from './GlobalStyles';
+import GlobalStyle, { Overlay, MainWrapper } from './GlobalStyles';
+import { useAppSelector } from './app/hooks';
+import { selectCartState } from './features/cart/cartSlice';
 
 function App() {
+  const { hidden } = useAppSelector(selectCartState);
   return (
     <div className="App">
       <GlobalStyle />
       <Nav />
-      <main>
+      {!hidden && <Overlay />}
+      <MainWrapper>
         <Routes>
           <Route path="/" element={<CategoryPage />} />
           <Route path="/product/:id" element={<ProductDisplay />} />
           <Route path="/checkout" element={<CheckoutPage />} />
         </Routes>
-      </main>
+      </MainWrapper>
     </div>
   );
 }

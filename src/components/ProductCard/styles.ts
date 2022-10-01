@@ -1,12 +1,29 @@
-import styled from 'styled-components';
+import styled, { css, ThemedStyledFunctionBase } from 'styled-components';
 
 import {
+  breakpointXl,
   breakpointLg,
   primaryColor,
   white,
 } from '../../constants/variables.styles';
 
-export const Wrapper = styled.div`
+interface ProductDisplayProps extends ThemedStyledFunctionBase<'div', object> {
+  quantity: number;
+}
+
+const getLowStockStyles = ({ quantity }: ProductDisplayProps) => {
+  if (quantity <= 0)
+    return css`
+      &:hover {
+        box-shadow: none;
+        div {
+          opacity: 0.5;
+        }
+      }
+    `;
+};
+
+export const Wrapper = styled.div<ProductDisplayProps>`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -25,16 +42,21 @@ export const Wrapper = styled.div`
       opacity: 1;
     }
   }
-  img {
-    max-width: 100%;
-    height: auto;
-  }
   @media (min-width: ${breakpointLg}px) {
-    width: 24vw;
+    width: 293px;
   }
+  @media (min-width: ${breakpointXl}px) {
+    width: 356px;
+    height: 444px;
+  }
+  img {
+    opacity: ${props => (props.quantity <= 0 ? 0.5 : 1)};
+  }
+
+  ${getLowStockStyles}
 `;
 
-export const DetailsContainer = styled.div`
+export const DetailsContainer = styled.div<ProductDisplayProps>`
   display: flex;
   flex-direction: column;
   font-size: 1.125rem;
@@ -44,6 +66,7 @@ export const DetailsContainer = styled.div`
     margin-top: 0.5rem;
     font-weight: 500;
   }
+  opacity: ${props => (props.quantity <= 0 ? 0.5 : 1)};
 `;
 
 export const CartContainer = styled.div`
@@ -59,9 +82,30 @@ export const CartContainer = styled.div`
   right: 25px;
   bottom: 55px;
   filter: drop-shadow(0px 4px 11px rgba(29, 31, 34, 0.1));
-  opacity: 0;
+  opacity: 1;
 
-  &:hover{
+  &:hover {
     box-shadow: 0px 4px 35px rgba(255, 255, 255, 0.05);
   }
+
+  @media (min-width: ${breakpointLg}px) {
+    opacity: 0;
+  }
+`;
+
+export const Image = styled.img`
+  max-width: 100%;
+  height: auto;
+`;
+
+export const StockWarning = styled.h2`
+  align-self: center;
+  top: 35%;
+  position: absolute;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 160%;
+  opacity: 1;
+  z-index: 1;
+  color: #8d8f9a;
 `;

@@ -1,15 +1,18 @@
 import { Wrapper } from './styles';
-import ProductCard from './../ProductCard';
 
-const ProductsList = () => {
+import ProductCard from './../ProductCard';
+import { Product } from '../../constants/types';
+
+interface ProductListProps {
+  products: Product[];
+}
+
+const ProductsList = ({ products }: ProductListProps) => {
   return (
     <Wrapper>
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
+      {products.map(product => (
+        <ProductCard key={product.id} product={product} />
+      ))}
     </Wrapper>
   );
 };

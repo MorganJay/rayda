@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { NavLinkPersist } from '../../supports/Persistence';
+import CustomNavLink from '../NavLink';
 
 import { primaryColor, darkColor } from '../../constants/variables.styles';
 
@@ -10,7 +10,7 @@ const activeStyles = css`
   font-weight: 600;
 `;
 
-export const NavLink = styled(NavLinkPersist)`
+export const NavLink = styled(CustomNavLink)`
   outline: none;
   color: ${darkColor};
   padding: 0px 15px 30px;
@@ -19,7 +19,7 @@ export const NavLink = styled(NavLinkPersist)`
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 400;
-  
+
   .active {
     border-bottom: 2px solid ${primaryColor};
   }
@@ -34,7 +34,10 @@ export const Navbar = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 3rem;
+  position: relative;
+  padding: 1.5rem 4rem;
+  z-index: 10;
+  background-color: white;
 `;
 
 export const CartCurrencyContainer = styled.div`
