@@ -4,7 +4,7 @@ export const addItemToCart = (
   cartItemToAdd: Product,
   cartItems: Product[]
 ): Product[] => {
-  const existingCartItem = cartItems.find(
+  const existingCartItem = cartItems?.find(
     cartItem => cartItem.id === cartItemToAdd.id
   );
 
@@ -38,3 +38,12 @@ export const removeItemFromCart = (
       : cartItem
   );
 };
+
+export const selectCartItemsCount = (cartItems: Product[]): number =>
+  cartItems?.reduce((acc, cartItem) => acc + cartItem.quantity, 0);
+
+export const selectCartTotal = (cartItems: Product[]): number =>
+  cartItems?.reduce(
+    (acc, cartItem) => acc + cartItem.quantity * cartItem.price,
+    0
+  );

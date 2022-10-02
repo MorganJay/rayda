@@ -3,6 +3,7 @@ export const breakpointSm = 576;
 export const breakpointMd = 768;
 export const breakpointLg = 992;
 export const breakpointXl = 1200;
+export const breakpointXXl = 1500;
 export const darkColor = '#1D1F22';
 export const overlayColor = '#393748';
 export const primaryColor = '#5ECE78';

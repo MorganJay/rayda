@@ -6,12 +6,17 @@ import Cart from '../Cart';
 import { Logo } from '../../assets';
 
 import { NavLink, Navbar, CartCurrencyContainer } from './styles';
-import { selectCartState } from '../../features/cart/cartSlice';
+import {
+  selectCartState,
+  selectCartStateItemsCount,
+} from '../../features/cart/cartSlice';
 import { useAppSelector } from '../../app/hooks';
 import CartDropdown from '../CartDropdown/index';
 
 const Nav = () => {
-  const { hidden } = useAppSelector(selectCartState);
+  const { hidden, products } = useAppSelector(selectCartState);
+  const count = useAppSelector(selectCartStateItemsCount);
+
   const className = ({ isActive }: { isActive: boolean }) =>
     `${isActive ? 'active' : ''}`;
 
@@ -33,9 +38,9 @@ const Nav = () => {
       </Link>
       <CartCurrencyContainer>
         <CurrencySwitcher />
-        <Cart />
+        <Cart count={count} />
       </CartCurrencyContainer>
-      {hidden ? null : <CartDropdown />}
+      {hidden ? null : <CartDropdown count={count} products={products} />}
     </Navbar>
   );
 };

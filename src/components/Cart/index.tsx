@@ -1,22 +1,17 @@
 import { CartIcon } from '../../assets';
+import { useAppDispatch } from '../../app/hooks';
+import { toggleCartHidden } from '../../features/cart/cartSlice';
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import {
-  selectCartState,
-  toggleCartHidden,
-} from '../../features/cart/cartSlice';
+import { CartDisplayProps } from '../../constants/types';
 
 import { CartContainer, CartCounter } from './styles';
 
-const Cart = () => {
-  const { products } = useAppSelector(selectCartState);
+const Cart = ({ count }: CartDisplayProps) => {
   const dispatch = useAppDispatch();
   return (
     <CartContainer onClick={() => dispatch(toggleCartHidden())}>
       <CartIcon fill="#43464E" />
-      <CartCounter hidden={products.length === 0}>
-        {products.length}
-      </CartCounter>
+      <CartCounter hidden={!count}>{count}</CartCounter>
     </CartContainer>
   );
 };

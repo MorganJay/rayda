@@ -1,7 +1,7 @@
 import styled, { css, ThemedStyledFunctionBase } from 'styled-components';
 
 import {
-  breakpointXl,
+  breakpointXXl,
   breakpointLg,
   primaryColor,
   white,
@@ -32,7 +32,7 @@ export const Wrapper = styled.div<ProductDisplayProps>`
   min-width: 250px;
   max-width: 356px;
   max-height: 444px;
-  width: 35vw;
+  width: 27.6%;
   position: relative;
   cursor: pointer;
   &:hover {
@@ -42,10 +42,10 @@ export const Wrapper = styled.div<ProductDisplayProps>`
       opacity: 1;
     }
   }
-  @media (min-width: ${breakpointLg}px) {
+  /* @media (min-width: ${breakpointLg}px) {
     width: 293px;
-  }
-  @media (min-width: ${breakpointXl}px) {
+  } */
+  @media (min-width: ${breakpointXXl}px) {
     width: 356px;
     height: 444px;
   }
@@ -105,6 +105,7 @@ export const StockWarning = styled.h2`
   font-weight: 400;
   font-size: 24px;
   line-height: 160%;
+  text-transform: uppercase;
   opacity: 1;
   z-index: 1;
   color: #8d8f9a;

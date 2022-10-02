@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { breakpointLg } from '../../constants/variables.styles';
+import { breakpointMd } from '../../constants/variables.styles';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -8,8 +8,9 @@ export const Wrapper = styled.div`
   align-items: center;
   gap: 5rem 6rem;
   flex-wrap: wrap;
+  width: 100%;
 
-  @media (min-width: ${breakpointLg}px) {
+  @media (min-width: ${breakpointMd}px) {
     justify-content: space-between;
   }
 `;

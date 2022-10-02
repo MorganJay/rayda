@@ -5,17 +5,20 @@ import CategoryPage from './pages/Category';
 import ProductDisplay from './pages/Product';
 import CheckoutPage from './pages/Checkout';
 
+import { useAppSelector, useAppDispatch } from './app/hooks';
+import { selectCartState, toggleCartHidden } from './features/cart/cartSlice';
+
 import GlobalStyle, { Overlay, MainWrapper } from './GlobalStyles';
-import { useAppSelector } from './app/hooks';
-import { selectCartState } from './features/cart/cartSlice';
 
 function App() {
   const { hidden } = useAppSelector(selectCartState);
+  const dispatch = useAppDispatch();
+
   return (
     <div className="App">
       <GlobalStyle />
       <Nav />
-      {!hidden && <Overlay />}
+      {!hidden && <Overlay onClick={() => dispatch(toggleCartHidden())} />}
       <MainWrapper>
         <Routes>
           <Route path="/" element={<CategoryPage />} />

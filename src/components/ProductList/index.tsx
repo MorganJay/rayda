@@ -10,9 +10,11 @@ interface ProductListProps {
 const ProductsList = ({ products }: ProductListProps) => {
   return (
     <Wrapper>
-      {products.map(product => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+      {products.length
+        ? products
+          .slice(0, 6)
+          .map(product => <ProductCard key={product.id} product={product} />)
+        : null}
     </Wrapper>
   );
 };

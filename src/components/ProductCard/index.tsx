@@ -1,6 +1,6 @@
 import { useAppDispatch } from '../../app/hooks';
 import { addProduct } from '../../features/cart/cartSlice';
-import { Product } from '../../constants/types';
+import { ProductCardProps } from '../../constants/types';
 
 import {
   Wrapper,
@@ -12,16 +12,12 @@ import {
 
 import { CartIcon } from '../../assets';
 
-interface ProductCardProps {
-  product: Product;
-}
+import { affixDecimals, getCurrencySymbol } from '../../utils/productFunctions';
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const dispatch = useAppDispatch();
 
   const { image, name, price, priceCurrency, quantity } = product;
-
-  const currencySymbol = priceCurrency === 'USD' ? '$' : '#';
 
   return (
     <Wrapper quantity={quantity}>
@@ -32,12 +28,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <CartIcon fill="#ffffff" />
         </CartContainer>
       )}
-      <Image src={image} alt="product" />
+      <Image src={image} alt={name} />
       <DetailsContainer quantity={quantity}>
         {name} <br />
         <span>
-          {currencySymbol}
-          {price}
+          {getCurrencySymbol(priceCurrency)}
+          {affixDecimals(price)}
         </span>
       </DetailsContainer>
     </Wrapper>

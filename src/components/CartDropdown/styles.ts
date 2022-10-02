@@ -37,8 +37,43 @@ export const ButtonContainer = styled.div`
 `;
 
 export const Label = styled.div`
-font-weight: 600;
+  font-weight: 600;
+`;
+
+export const CartItemsContainer = styled.div`
+  text-align: center;
+  height: auto;
+  min-height: 11.875rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  gap: 3rem;
+
   span {
-    font-weight: 700;
+    margin: auto;
+  }
+
+  &::-webkit-scrollbar,
+  &::-webkit-scrollbar-thumb {
+    width: 7px;
+    border-radius: 15px;
+    transition: all 5s;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 15px;
+  }
+
+  &:hover {
+    transition: all 5s;
+    &::-webkit-scrollbar-thumb {
+      transition: all 5s;
+      background: rgb(145, 144, 144);
+    }
   }
 `;
