@@ -20,8 +20,8 @@ export const NavLink = styled(CustomNavLink)`
   text-transform: uppercase;
   font-weight: 400;
 
-  .active {
-    border-bottom: 2px solid ${primaryColor};
+  &.woman {
+    ${activeStyles}
   }
 
   &:hover,

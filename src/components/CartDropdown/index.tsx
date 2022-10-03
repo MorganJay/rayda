@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import Button from '../Button';
 import CartItem from '../CartItem';
 
@@ -7,19 +9,41 @@ import {
   ButtonContainer,
   Label,
   CartItemsContainer,
+  EmptyCartMessage,
 } from './styles';
-import { darkColor, primaryColor } from '../../constants/variables.styles';
+import { darkColor } from '../../constants/variables.styles';
 
-import { useAppSelector } from '../../app/hooks';
-import { selectCartStateTotal } from '../../features/cart/cartSlice';
-import { selectCurrencySymbol } from '../../features/products/productsSlice';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { selectCartStateTotal, toggleCartHidden } from '../../features/cart/cartSlice';
 
 import { CartDisplayProps } from '../../constants/types';
-import { affixDecimals } from '../../utils/productFunctions';
+import {
+  affixDecimals,
+  convertCurrencyValue,
+} from '../../utils/productFunctions';
+import { selectCurrencyState } from '../../features/currency/currencySlice';
 
 const CartDropdown = ({ count, products }: CartDisplayProps) => {
-  const total = affixDecimals(useAppSelector(selectCartStateTotal));
-  const currency = useAppSelector(selectCurrencySymbol);
+  const { currency, symbol } = useAppSelector(selectCurrencyState);
+  const total = useAppSelector(selectCartStateTotal);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  
+  const displayPrice =
+    symbol +
+    (products?.length
+      ? affixDecimals(
+        convertCurrencyValue(total, products[0].priceCurrency, currency)
+      )
+      : '0.00');
+
+  const directToCheckout = () => {
+    if (!products?.length)
+      return alert('Please add at least one product to checkout');
+
+    navigate('/checkout');
+    dispatch(toggleCartHidden());
+  };
 
   return (
     <Container>
@@ -27,28 +51,26 @@ const CartDropdown = ({ count, products }: CartDisplayProps) => {
       <CartItemsContainer>
         {products?.length ? (
           products.map(product => (
-            <CartItem
-              key={product.id}
-              product={product}
-              currencySymbol={currency}
-            />
+            <CartItem key={product.id} product={product} />
           ))
         ) : (
-          <span>Your cart is empty</span>
+          <EmptyCartMessage>Your cart is empty</EmptyCartMessage>
         )}
       </CartItemsContainer>
       <TotalContainer>
         Total
-        <span>
-          {currency}
-          {total}
-        </span>
+        <span>{displayPrice}</span>
       </TotalContainer>
       <ButtonContainer>
-        <Button name="View bag" colour={darkColor} inverted>
+        <Button
+          name="View bag"
+          color={darkColor}
+          onClick={directToCheckout}
+          inverted
+        >
           VIEW BAG
         </Button>
-        <Button name="Checkout" colour={primaryColor}>
+        <Button name="Checkout" onClick={directToCheckout}>
           CHECK OUT
         </Button>
       </ButtonContainer>

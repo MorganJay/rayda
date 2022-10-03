@@ -1,21 +1,22 @@
 import styled, { css } from 'styled-components';
 
-import { ProductDetailProps } from '../../constants/types';
-import { primaryColor, darkColor } from '../../constants/variables.styles';
+import { ProductDetailProps } from './ProductDetailsProps';
+import { darkColor } from '../../constants/variables.styles';
 
-const colorStyles = (
-  defaultChecked: boolean | undefined,
-  color: string | undefined
-) => css`
+const colorStyles = (color?: string) => css`
   width: 100%;
   height: 100%;
   background-color: ${color};
-  border: 1px solid ${defaultChecked ? `${primaryColor}` : 'white'};
+  border: 1px solid white;
 `;
 
-const dimensionStyles = (defaultChecked: boolean | undefined) => css`
-  width: 24px;
-  height: 24px;
+const dimensionStyles = (
+  defaultChecked?: boolean,
+  width?: string,
+  height?: string
+) => css`
+  width: ${width || 1.5}rem;
+  height: ${height || 1.5}rem;
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 400;
   font-size: 14px;
@@ -34,10 +35,11 @@ const dimensionStyles = (defaultChecked: boolean | undefined) => css`
 
 const getDetailStyles = (props: ProductDetailProps) =>
   props.title === 'color'
-    ? colorStyles(props.defaultChecked, props.color)
-    : dimensionStyles(props.defaultChecked);
+    ? colorStyles(props.color)
+    : dimensionStyles(props.defaultChecked, props.width, props.height);
 
 export const Container = styled.div<ProductDetailProps>`
   cursor: pointer;
+  user-select: none;
   ${getDetailStyles}
 `;

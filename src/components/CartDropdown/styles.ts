@@ -12,6 +12,7 @@ export const Container = styled.div`
   background-color: white;
   top: 80px;
   right: 45px;
+  box-shadow: 0px 4px 35px rgb(168 172 176 / 19%);
   z-index: 5;
 `;
 
@@ -34,6 +35,12 @@ export const ButtonContainer = styled.div`
   gap: 1rem;
   width: 100%;
   align-items: center;
+
+  button {
+    width: 50%;
+    max-width: 8.75rem;
+    max-height: 2.688px;
+  }
 `;
 
 export const Label = styled.div`
@@ -48,10 +55,7 @@ export const CartItemsContainer = styled.div`
   flex-direction: column;
   overflow-y: scroll;
   gap: 3rem;
-
-  span {
-    margin: auto;
-  }
+  overflow-x: hidden;
 
   &::-webkit-scrollbar,
   &::-webkit-scrollbar-thumb {
@@ -76,4 +80,8 @@ export const CartItemsContainer = styled.div`
       background: rgb(145, 144, 144);
     }
   }
+`;
+
+export const EmptyCartMessage = styled.span`
+  margin: auto;
 `;

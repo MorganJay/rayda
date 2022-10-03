@@ -1,12 +1,17 @@
 import { Product } from '../../constants/types';
 
+export const findItemInCart = (
+  id: number,
+  cartItems: Product[]
+): Product | undefined => {
+  return cartItems?.find(cartItem => cartItem.id === id);
+};
+
 export const addItemToCart = (
   cartItemToAdd: Product,
   cartItems: Product[]
 ): Product[] => {
-  const existingCartItem = cartItems?.find(
-    cartItem => cartItem.id === cartItemToAdd.id
-  );
+  const existingCartItem = findItemInCart(cartItemToAdd.id, cartItems);
 
   if (existingCartItem) {
     return cartItems.map(cartItem =>
@@ -23,9 +28,7 @@ export const removeItemFromCart = (
   cartItems: Product[],
   cartItemToRemove: Product
 ) => {
-  const existingCartItem = cartItems.find(
-    cartItem => cartItem.id === cartItemToRemove.id
-  );
+  const existingCartItem = findItemInCart(cartItemToRemove.id, cartItems);
 
   if (!existingCartItem) return cartItems;
 
@@ -47,3 +50,16 @@ export const selectCartTotal = (cartItems: Product[]): number =>
     (acc, cartItem) => acc + cartItem.quantity * cartItem.price,
     0
   );
+
+export const updateItemInCart = (
+  cartItemToUpdate: Product,
+  cartItems: Product[]
+): Product[] => {
+  const existingCartItem = findItemInCart(cartItemToUpdate.id, cartItems);
+
+  if (!existingCartItem) return cartItems;
+
+  return cartItems.map(cartItem =>
+    cartItem.id === cartItemToUpdate.id ? { ...cartItemToUpdate } : cartItem
+  );
+};

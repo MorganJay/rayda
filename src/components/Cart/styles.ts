@@ -12,6 +12,7 @@ export const CartCounter = styled.span`
   border-radius: 60px;
   font-size: 14px;
   font-weight: 700;
+  user-select: none;
   font-family: 'Roboto', san-serif;
   color: ${white};
   width: 20px;

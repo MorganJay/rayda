@@ -1,37 +1,32 @@
 import { Link } from 'react-router-dom';
 
-import CurrencySwitcher from '../CurrencySwitch';
 import Cart from '../Cart';
+import CartDropdown from '../CartDropdown';
+import CurrencySwitcher from '../CurrencySwitch';
+import CurrencyDropdown from '../CurrencyDropdown';
 
 import { Logo } from '../../assets';
 
-import { NavLink, Navbar, CartCurrencyContainer } from './styles';
+import { useAppSelector } from '../../app/hooks';
 import {
   selectCartState,
   selectCartStateItemsCount,
 } from '../../features/cart/cartSlice';
-import { useAppSelector } from '../../app/hooks';
-import CartDropdown from '../CartDropdown/index';
+
+import { NavLink, Navbar, CartCurrencyContainer } from './styles';
+import { selectCurrencyState } from '../../features/currency/currencySlice';
 
 const Nav = () => {
   const { hidden, products } = useAppSelector(selectCartState);
+  const { toggleHidden } = useAppSelector(selectCurrencyState);
   const count = useAppSelector(selectCartStateItemsCount);
-
-  const className = ({ isActive }: { isActive: boolean }) =>
-    `${isActive ? 'active' : ''}`;
 
   return (
     <Navbar>
       <div>
-        <NavLink className="active" to="/">
-          WOMEN
-        </NavLink>
-        <NavLink className={className} to="/">
-          MEN
-        </NavLink>
-        <NavLink className={className} to="/">
-          KIDS
-        </NavLink>
+        <NavLink to="/" className="woman">WOMEN</NavLink>
+        <NavLink to="/">MEN</NavLink>
+        <NavLink to="/">KIDS</NavLink>
       </div>
       <Link to="/" style={{ paddingRight: 150 }}>
         <Logo />
@@ -40,7 +35,8 @@ const Nav = () => {
         <CurrencySwitcher />
         <Cart count={count} />
       </CartCurrencyContainer>
-      {hidden ? null : <CartDropdown count={count} products={products} />}
+      {!hidden && <CartDropdown count={count} products={products} />}
+      {!toggleHidden && <CurrencyDropdown />}
     </Navbar>
   );
 };

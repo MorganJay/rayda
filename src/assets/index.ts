@@ -9,4 +9,15 @@ import ProductD from './images/Product-D.png';
 import Shades from './images/black-shades.png';
 import Products from './data/products';
 
-export { Logo, CartIcon, Down, Up, ProductA, ProductB, ProductC, ProductD, Products, Shades };
+export {
+  Logo,
+  CartIcon,
+  Down,
+  Up,
+  ProductA,
+  ProductB,
+  ProductC,
+  ProductD,
+  Products,
+  Shades,
+};

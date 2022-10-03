@@ -1,24 +1,35 @@
-import { darkColor } from '../../constants/variables.styles';
+import { QuantityTogglerProps } from './QuantityTogglerProps';
+
 import { Container, QuantitySpan, ToggleButton } from './styles';
 
-export interface QuantityTogglerProps {
-  quantity: number;
-  onIncrement: () => void;
-  onDecrement: () => void;
-}
+import { darkColor } from '../../constants/variables.styles';
 
 const QuantityToggler = ({
   quantity,
+  buttonSize,
+  fontSize,
   onIncrement,
   onDecrement,
 }: QuantityTogglerProps) => {
   return (
     <Container>
-      <ToggleButton onClick={() => onIncrement()} colour={darkColor} inverted>
+      <ToggleButton
+        buttonSize={buttonSize}
+        fontSize={fontSize}
+        onClick={() => onIncrement()}
+        color={darkColor}
+        inverted
+      >
         +
       </ToggleButton>
       <QuantitySpan>{quantity}</QuantitySpan>
-      <ToggleButton onClick={() => onDecrement()} colour={darkColor} inverted>
+      <ToggleButton
+        buttonSize={buttonSize}
+        fontSize={fontSize}
+        onClick={() => onDecrement()}
+        color={darkColor}
+        inverted
+      >
         -
       </ToggleButton>
     </Container>

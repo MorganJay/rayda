@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { ProductDetailProps } from '../components/ProductDetail/ProductDetailsProps';
 
-import { ProductDetailProps } from '../constants/types';
 import { primaryColor } from '../constants/variables.styles';
 
 /**
@@ -13,7 +13,12 @@ export function withWhiteBorder<P>(WrappedComponent: React.ComponentType<P>) {
   const BorderWrapped = (props: P & ProductDetailProps) => {
     if (props.title === 'color') {
       return (
-        <Wrapper>
+        <Wrapper
+          choice={props.choice}
+          color={props.color}
+          width={props.width}
+          height={props.height}
+        >
           <WrappedComponent {...props} />
         </Wrapper>
       );
@@ -25,12 +30,21 @@ export function withWhiteBorder<P>(WrappedComponent: React.ComponentType<P>) {
   return BorderWrapped;
 }
 
-const Wrapper = styled.div`
-  width: 1rem;
-  height: 1rem;
-  display: grid;
-  place-items: center;
+const activeStyles = css`
+  border: 1px solid ${primaryColor};
+`;
+
+const inactiveStyles = css`
   &:hover {
     border: 1px solid ${primaryColor};
   }
+`;
+
+const getActiveStyles = ({ choice, color }: ProductDetailProps) =>
+  choice === color ? activeStyles : inactiveStyles;
+
+const Wrapper = styled.div<ProductDetailProps>`
+  width: ${props => props.width || 1}rem;
+  height: ${props => props.height || 1}rem;
+  ${getActiveStyles}
 `;

@@ -14,7 +14,7 @@ export const ItemDetailsContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 0.4rem;
+  gap: 0.5rem;
   text-align: left;
   max-height: 100%;
 `;

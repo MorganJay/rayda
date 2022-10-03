@@ -5,6 +5,7 @@ export interface Product {
   image: string;
   priceCurrency: string;
   quantity: number;
+  notes?: string;
   selectedSize?: string;
   sizes?: string[];
   colours?: string[];
@@ -13,7 +14,6 @@ export interface Product {
 
 export interface ProductCardProps {
   product: Product;
-  currencySymbol?: string;
 }
 
 export type Currency = 'USD' | 'EUR' | 'JPY';
@@ -21,9 +21,4 @@ export type Currency = 'USD' | 'EUR' | 'JPY';
 export interface CartDisplayProps {
   count: number;
   products?: Product[];
-}
-export interface ProductDetailProps
-  extends React.ComponentPropsWithoutRef<'span'> {
-  choice?: string;
-  color?: string;
 }

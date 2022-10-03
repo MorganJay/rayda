@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
-import { ButtonProps } from '.';
+
+import { ButtonProps } from './ButtonProps';
 
 const invertedButtonStyles = (color: string) => css`
   background-color: white;
@@ -16,7 +17,6 @@ const buttonStyles = (color: string) => css`
   background-color: ${color};
   color: white;
   border: 1px solid ${color};
-  flex-grow: 0;
 
   &:hover {
     background-color: white;
@@ -24,25 +24,22 @@ const buttonStyles = (color: string) => css`
   }
 `;
 
-const getButtonStyles = (props: ButtonProps) =>
-  props.inverted
-    ? invertedButtonStyles(props.colour)
-    : buttonStyles(props.colour);
+const getButtonStyles = (props: ButtonProps) =>{
+  return props.inverted
+    ? invertedButtonStyles(props.color!)
+    : buttonStyles(props.color!);}
 
 export const StyledButton = styled.button<ButtonProps>`
   padding: 16px 32px;
-  max-height: 43px;
-  max-width: 140px;
   text-transform: uppercase;
   height: fit-content;
-  width: fit-content;
+  width: 100%;
   white-space: nowrap;
   flex: none;
   font-size: 14px;
   font-weight: 600;
-  order: 0;
-  flex-grow: 0;
   cursor: pointer;
+  display: block;
   display: flex;
   flex-direction: column;
   justify-content: center;

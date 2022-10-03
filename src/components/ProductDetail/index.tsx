@@ -1,4 +1,4 @@
-import { ProductDetailProps } from '../../constants/types';
+import { ProductDetailProps } from './ProductDetailsProps';
 import { withWhiteBorder } from '../../utils/withWhiteBorder';
 import { Container } from './styles';
 
@@ -12,9 +12,9 @@ const ProductDetail = ({
   return (
     <Container
       {...props}
-      defaultChecked={choice === children || choice === color}
       title={title}
       color={color}
+      defaultChecked={choice === children || choice === color}
     >
       {title !== 'color' && children}
     </Container>

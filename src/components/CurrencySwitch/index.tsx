@@ -1,17 +1,20 @@
-import { useState } from 'react';
-import { ReactComponent as Down } from '../../assets/images/Vectordown.svg';
-import { ReactComponent as Up } from '../../assets/images/Vectorup.svg';
-
 import { Wrapper } from './styles';
 
-const CurrencySwitcher = () => {
-  const [dropDownOpen, setDropDownOpen] = useState(false);
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import {
+  selectCurrencyState,
+  toggleSwitchHidden,
+} from '../../features/currency/currencySlice';
 
-  const handleDropDownOpen = () => setDropDownOpen(!dropDownOpen);
+import { Up, Down } from '../../assets';
+
+const CurrencySwitcher = () => {
+  const dispatch = useAppDispatch();
+  const { symbol, toggleHidden } = useAppSelector(selectCurrencyState);
 
   return (
-    <Wrapper onClick={handleDropDownOpen}>
-      $ {dropDownOpen ? <Up /> : <Down />}
+    <Wrapper onClick={() => dispatch(toggleSwitchHidden())}>
+      {symbol} {!toggleHidden ? <Up /> : <Down />}
     </Wrapper>
   );
 };

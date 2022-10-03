@@ -1,9 +1,12 @@
 import DetailSelector from '../ProductDetailSelector';
 import QuantityToggler from '../QuantityCounter';
 
-import { useAppDispatch } from '../../app/hooks';
-import { ProductCardProps } from '../../constants/types';
-import { affixDecimals } from '../../utils/productFunctions';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { Product, ProductCardProps } from '../../constants/types';
+import {
+  affixDecimals,
+  convertCurrencyValue,
+} from '../../utils/productFunctions';
 
 import {
   CartItemContainer,
@@ -11,14 +14,21 @@ import {
   CartItemImage,
   ItemDetails,
 } from './styles';
-import { addProduct, removeProduct } from '../../features/cart/cartSlice';
+import {
+  addProduct,
+  removeProduct,
+  updateProduct,
+} from '../../features/cart/cartSlice';
+import { selectCurrencyState } from '../../features/currency/currencySlice';
 
-const CartItem = ({ product, currencySymbol }: ProductCardProps) => {
+const CartItem = ({ product }: ProductCardProps) => {
+  const { currency, symbol } = useAppSelector(selectCurrencyState);
   const dispatch = useAppDispatch();
   const {
     image,
     name,
     price,
+    priceCurrency,
     quantity,
     sizes,
     colours,
@@ -28,8 +38,22 @@ const CartItem = ({ product, currencySymbol }: ProductCardProps) => {
 
   const overallPrice = price * quantity;
 
+  const displayPrice = `${symbol}${affixDecimals(
+    convertCurrencyValue(overallPrice, priceCurrency, currency)
+  )}`;
+
   const restItemName =
     name.split(' ').length > 1 ? name.split(' ').slice(1).join(' ') : '';
+
+  const handleColourSelect = (colour: string) => {
+    const productToUpdate: Product = { ...product, selectedColour: colour };
+    dispatch(updateProduct(productToUpdate));
+  };
+
+  const handleSizeSelect = (size: string) => {
+    const productToUpdate: Product = { ...product, selectedSize: size };
+    dispatch(updateProduct(productToUpdate));
+  };
 
   return (
     <CartItemContainer>
@@ -40,10 +64,7 @@ const CartItem = ({ product, currencySymbol }: ProductCardProps) => {
           <br />
           {restItemName}
           <br />
-          <span>
-            {currencySymbol}
-            {affixDecimals(overallPrice)}
-          </span>
+          <span>{displayPrice}</span>
         </ItemDetails>
 
         {/* Size selector and indicator */}
@@ -52,6 +73,7 @@ const CartItem = ({ product, currencySymbol }: ProductCardProps) => {
             label="size"
             items={sizes}
             selectedItem={selectedSize}
+            onSelect={handleSizeSelect}
           />
         )}
 
@@ -61,6 +83,7 @@ const CartItem = ({ product, currencySymbol }: ProductCardProps) => {
             label="color"
             items={colours}
             selectedItem={selectedColour}
+            onSelect={handleColourSelect}
           />
         )}
       </ItemDetailsContainer>

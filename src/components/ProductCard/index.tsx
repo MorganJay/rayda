@@ -1,5 +1,9 @@
-import { useAppDispatch } from '../../app/hooks';
+import { useNavigate } from 'react-router-dom';
+
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { addProduct } from '../../features/cart/cartSlice';
+import { selectCurrencyState } from '../../features/currency/currencySlice';
+
 import { ProductCardProps } from '../../constants/types';
 
 import {
@@ -12,12 +16,20 @@ import {
 
 import { CartIcon } from '../../assets';
 
-import { affixDecimals, getCurrencySymbol } from '../../utils/productFunctions';
+import {
+  affixDecimals,
+  convertCurrencyValue,
+} from '../../utils/productFunctions';
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const dispatch = useAppDispatch();
-
+  const navigate = useNavigate();
+  const { currency, symbol } = useAppSelector(selectCurrencyState);
   const { image, name, price, priceCurrency, quantity } = product;
+
+  const displayPrice = `${symbol}${affixDecimals(
+    convertCurrencyValue(price, priceCurrency, currency)
+  )}`;
 
   return (
     <Wrapper quantity={quantity}>
@@ -28,13 +40,14 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <CartIcon fill="#ffffff" />
         </CartContainer>
       )}
-      <Image src={image} alt={name} />
+      <Image
+        src={image}
+        alt={name}
+        onClick={() => navigate(`/product/${product.id}`)}
+      />
       <DetailsContainer quantity={quantity}>
         {name} <br />
-        <span>
-          {getCurrencySymbol(priceCurrency)}
-          {affixDecimals(price)}
-        </span>
+        <span>{displayPrice}</span>
       </DetailsContainer>
     </Wrapper>
   );

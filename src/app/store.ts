@@ -13,18 +13,21 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
-import productReducer from '../features/products/productsSlice';
 import cartReducer from '../features/cart/cartSlice';
+import currencyReducer from '../features/currency/currencySlice';
+import productReducer from '../features/products/productsSlice';
 
 const persistConfig = {
   key: 'root',
+  version: 1,
   storage,
-  whitelist: ['cart'],
+  whitelist: ['cart', 'currency'],
 };
 
 const reducers = combineReducers({
   products: productReducer,
   cart: cartReducer,
+  currency: currencyReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

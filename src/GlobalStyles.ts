@@ -4,15 +4,17 @@ const GlobalStyle = createGlobalStyle`
    * {
      box-sizing: border-box;
      font-family: 'Raleway', sans-serif;
+     margin: 0;
+     padding: 0;
    }
+   
  body {
-  margin: 0;
-  padding: 0;
   color: #1d1f22;
   height: 100vh;
   min-height: 100vh;
 
 }
+
 #root{
   margin: 0 auto;
 }
@@ -21,14 +23,26 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
+  ul{
+    list-style-type: none;
+  }
+
   .App{
     height: 100%;
     width: 100%;
   }
 
+  img{
+    max-width: 100%;
+    height: auto;
+  }
+
+
 `;
 
-export const MainWrapper = styled.main``;
+export const MainWrapper = styled.main`
+  padding: 3rem 4rem;
+`;
 
 export const Overlay = styled.div`
   width: 100%;

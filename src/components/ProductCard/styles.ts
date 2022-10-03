@@ -2,6 +2,7 @@ import styled, { css, ThemedStyledFunctionBase } from 'styled-components';
 
 import {
   breakpointXXl,
+  breakpointXl,
   breakpointLg,
   primaryColor,
   white,
@@ -30,9 +31,9 @@ export const Wrapper = styled.div<ProductDisplayProps>`
   padding: 16px;
   background: ${white};
   min-width: 250px;
-  max-width: 356px;
-  max-height: 444px;
-  width: 27.6%;
+  max-width: 24.125rem;
+  max-height: 27.75rem;
+  width: 22rem;
   position: relative;
   cursor: pointer;
   &:hover {
@@ -42,9 +43,10 @@ export const Wrapper = styled.div<ProductDisplayProps>`
       opacity: 1;
     }
   }
-  /* @media (min-width: ${breakpointLg}px) {
-    width: 293px;
-  } */
+
+  @media (min-width: ${breakpointXl}px) {
+    width: 18rem;
+  }
   @media (min-width: ${breakpointXXl}px) {
     width: 356px;
     height: 444px;
@@ -83,6 +85,7 @@ export const CartContainer = styled.div`
   bottom: 55px;
   filter: drop-shadow(0px 4px 11px rgba(29, 31, 34, 0.1));
   opacity: 1;
+  z-index: 3;
 
   &:hover {
     box-shadow: 0px 4px 35px rgba(255, 255, 255, 0.05);
@@ -93,10 +96,7 @@ export const CartContainer = styled.div`
   }
 `;
 
-export const Image = styled.img`
-  max-width: 100%;
-  height: auto;
-`;
+export const Image = styled.img``;
 
 export const StockWarning = styled.h2`
   align-self: center;

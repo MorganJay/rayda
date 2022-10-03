@@ -1,13 +1,14 @@
 import { StyledButton } from './styles';
-import React from 'react';
 
-export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
-  inverted?: boolean;
-  colour: string;
-}
+import { primaryColor } from '../../constants/variables.styles';
+import { ButtonProps } from './ButtonProps';
 
-const Button = ({ children, ...props }: ButtonProps) => {
-  return <StyledButton {...props}>{children}</StyledButton>;
+const Button = ({ color = primaryColor, children, ...props }: ButtonProps) => {
+  return (
+    <StyledButton color={color} type="button" {...props}>
+      {children}
+    </StyledButton>
+  );
 };
 
 export default Button;

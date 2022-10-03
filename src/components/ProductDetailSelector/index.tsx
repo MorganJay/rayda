@@ -1,23 +1,41 @@
-import { Wrapper, ItemsWrapper } from './styles';
-import ProductDetail from '../ProductDetail/index';
+import ProductDetail from '../ProductDetail';
+import { DetailSelectorProps } from './DetailSelectorProps';
 
-export interface DetailSelectorProps {
-  label: string;
-  items: string[];
-  selectedItem?: string;
-}
+import { Wrapper, ItemsWrapper, Label } from './styles';
 
 const DetailSelector = ({
   label,
+  labelSize,
+  labelWeight,
   items,
   selectedItem,
+  textTransform,
+  onSelect,
+  selectorHeight,
+  selectorWidth,
+  fontFamily,
 }: DetailSelectorProps) => {
   return (
     <Wrapper>
-      {label}:
+      <Label
+        labelSize={labelSize}
+        textTransform={textTransform}
+        labelWeight={labelWeight}
+        fontFamily={fontFamily}
+      >
+        {label}:
+      </Label>
       <ItemsWrapper>
         {items.map((item, idx) => (
-          <ProductDetail key={idx} title={label} choice={selectedItem} color={item}>
+          <ProductDetail
+            key={idx}
+            title={label}
+            width={selectorWidth}
+            choice={selectedItem}
+            color={item}
+            height={selectorHeight}
+            onClick={() => onSelect(item)}
+          >
             {item}
           </ProductDetail>
         ))}
