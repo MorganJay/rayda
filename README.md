@@ -6,6 +6,8 @@
 - Ensure The single responsibility pattern is adhered to
 - Ensure the DRY design pattern is taken into consideration
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6a0551b1-5b97-4fb7-90dc-096a310ae928/deploy-status)](https://app.netlify.com/sites/mj-rayda-assessment/deploys)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
