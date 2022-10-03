@@ -39,11 +39,19 @@ export const cartSlice = createSlice({
     updateProduct: (state, action: PayloadAction<Product>) => {
       state.products = updateItemInCart(action.payload, state.products);
     },
+    clearProducts: state => {
+      state.products = [];
+    },
   },
 });
 
-export const { addProduct, removeProduct, toggleCartHidden, updateProduct } =
-  cartSlice.actions;
+export const {
+  addProduct,
+  removeProduct,
+  toggleCartHidden,
+  updateProduct,
+  clearProducts,
+} = cartSlice.actions;
 
 export const selectCartState = (state: RootState) => state.cart;
 
